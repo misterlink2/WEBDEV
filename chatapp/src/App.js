@@ -1,17 +1,19 @@
 import React from 'react'
 import MessageList from './components/MessageList'
-import Chatkit from '@pusher/chatkit'
+import {default as Chatkit} from '@pusher/chatkit-server'
+import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
 import SendMessageForm from './components/SendMessageForm'
 import RoomList from './components/RoomList'
 import NewRoomForm from './components/NewRoomForm'
 
-import {tokenURL, instanceLocator} from './config'
+import {tokenUrl, instanceLocator} from './config'
+
 class App extends React.Component {
   componentDidMount() {
-    const chatManager = new Chatkit.ChatManager({
+    const chatManager = new ChatManager({
       instanceLocator,
       userID: 'admin',
-      tokenProvider: new Chatkit.TokenProvider({
+      tokenProvider: new TokenProvider({
         url: tokenUrl
       })
 
